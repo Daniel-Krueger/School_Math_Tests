@@ -1,0 +1,70 @@
+body {
+    font-family: 'Comic Sans MS', sans-serif;
+    
+    font-size: 24px;
+    background: url('https://www.transparenttextures.com/patterns/cartographer.png'); /* Comic-ähnlicher Hintergrund */
+    color: #333;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+h1 {
+    font-size: 36px;
+    color: #ff6347;
+    text-shadow: 2px 2px #ffa500;
+}
+
+.task, .score, .answer-section {
+    display: none; /* Versteckt bis der Name eingegeben ist */
+}
+
+input {
+    font-size: 20px;
+    padding: 10px;
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid #ff6347;
+}
+
+button {
+    font-size: 20px;
+    padding: 10px 30px;
+    margin-top: 20px;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff6347;
+}
+
+.feedback {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.comic-character {
+    margin-top: 20px;
+}
+
+img {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.score {
+    font-size: 24px;
+    color: #007700;
+    margin-top: 10px;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einmaleins Üben - Magische Hexe</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Übe das Einmaleins mit der Zauberhexe!</h1>
+
+        <div id="welcome-message" style="display: none;">
+            <p>Willkommen zurück, <span id="stored-name"></span>!</p>
+            <button id="start-game-button" onclick="startGame()">Los geht's!</button>
+        </div>
+
+        <div id="name-input-section">
+            <label for="name-input">Gib deinen Namen ein:</label>
+            <input type="text" id="name-input" placeholder="Dein Name">
+            <button onclick="saveName()">Los geht's!</button>
+        </div>
+
+        <div class="task" style="display: none;">
+            <div class="multiplication-task">
+                <span id="multiplication-task"></span>
+            </div>
+        </div>
+
+        <div class="answer-section" style="display: none;">
+            <input type="number" inputmode="numeric" id="user-answer" placeholder="Deine Antwort" onkeypress="if(event.key === 'Enter') checkAnswer()">
+            <button onclick="checkAnswer()">Antwort prüfen</button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="score" style="display: none;">
+            <span>Heutige Punkte: </span><span id="score">0</span>
+        </div>
+
+        <button id="new-task-button" style="display: none;float: right;" onclick="generateTask()">Neue Aufgabe</button>
+
+        <!-- Hier ist das Hexenbild -->
+        <div class="comic-character">
+            <!--<img src="URL_ZU_DEINEM_HEXENBILD" alt="Magische Hexe">-->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
