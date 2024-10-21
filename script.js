@@ -17,7 +17,7 @@ function saveName() {
         localStorage.setItem(playerNameKey, nameInput);
         currentScore = 0;
         updateUI('score', currentScore);
-        toggleDisplay(['unknown-user-section', 'welcome-message', 'taskBoard', 'main'], ['none', 'block', 'block', 'block']);
+        toggleDisplay(['#unknown-user-section', '#welcome-message', '#taskBoard', '#main'], ['none', 'block', 'block', 'block']);
         startGame();
     } else {
         alert("Bitte gib einen Namen ein.");
@@ -30,10 +30,35 @@ function startGame() {
 }
 
 function generateTask() {
-    num1 = Math.floor(Math.random() * 20) + 1;
-    num2 = Math.floor(Math.random() * 10) + 1;
-    correctAnswer = num1 * num2;
-    updateUI('multiplication-task', `${num1} × ${num2} = ?`);
+    const taskTypes = ['multiplication', 'division', 'addition', 'subtraction'];
+    const taskType = taskTypes[Math.floor(Math.random() * taskTypes.length)];
+    
+    if (taskType === 'multiplication') {
+        num1 = Math.floor(Math.random() * 20) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        correctAnswer = num1 * num2;
+        updateUI('multiplication-task', `${num1} × ${num2} = ?`);
+    } else if (taskType === 'division') {
+        num1 = Math.floor(Math.random() * 100) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+        num1 = num1 - (num1 % num2); // Ensure the result is an integer
+        correctAnswer = num1 / num2;
+        updateUI('multiplication-task', `${num1} ÷ ${num2} = ?`);
+    } else if (taskType === 'addition') {
+        num1 = Math.floor(Math.random() * 101);
+        num2 = Math.floor(Math.random() * 101);
+        correctAnswer = num1 + num2;
+        updateUI('multiplication-task', `${num1} + ${num2} = ?`);
+    } else if (taskType === 'subtraction') {
+        num1 = Math.floor(Math.random() * 101);
+        num2 = Math.floor(Math.random() * 101);
+        if (num1 < num2) {
+            [num1, num2] = [num2, num1]; // Ensure the result is not below 0
+        }
+        correctAnswer = num1 - num2;
+        updateUI('multiplication-task', `${num1} - ${num2} = ?`);
+    }
+    
     toggleDisplay(['.answer-section', '.task'], ['inherit', 'inherit']);
     updateUI('feedback', '');
     updateUI('user-answer', '', 'value');
@@ -48,10 +73,10 @@ window.onload = function () {
     const storedName = localStorage.getItem(playerNameKey);
     if (storedName) {
         updateUI('stored-name', storedName);
-        toggleDisplay(['welcome-message', 'name-input-section', 'main'], ['block', 'none', 'block']);
+        toggleDisplay(['#welcome-message', '#name-input-section', '#main'], ['block', 'none', 'block']);
         loadScore();
     } else {
-        toggleDisplay(['unknown-user-section'], ['block']);
+        toggleDisplay(['#unknown-user-section'], ['block']);
     }
 }
 
@@ -75,6 +100,8 @@ function checkAnswer() {
         updateUI('score', currentScore);
         setTimeout(generateTask, 1500);
     } else {
+        currentScore -= 3;
+        updateHighscore(currentScore);
         updateUI('feedback', `Falsch. Die richtige Antwort ist ${correctAnswer}.`);
         setTimeout(generateTask, 5000);
     }
@@ -105,5 +132,12 @@ function updateUI(elementId, content, type = 'innerText') {
 }
 
 function toggleDisplay(elements, displays) {
-    elements.forEach((el, idx) => document.querySelector(el).style.display = displays[idx]);
+    elements.forEach((el, idx) => {
+        const element = document.querySelector(el);
+        if (element) {
+            element.style.display = displays[idx];
+        } else {
+            console.error(`Element not found: ${el}`);
+        }
+    });
 }
