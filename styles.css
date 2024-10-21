@@ -68,3 +68,23 @@ img {
     color: #007700;
     margin-top: 10px;
 }
+
+.highscore-board {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.highscore-board h2 {
+    margin-bottom: 10px;
+}
+
+.highscore-board ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.highscore-board li {
+    margin-bottom: 5px;
+}
