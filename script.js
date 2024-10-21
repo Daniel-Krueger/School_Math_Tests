@@ -92,7 +92,7 @@ window.onload = function () {
         // Check if there's already an entry for the current date
         const existingEntry = highscores.find(entry => entry.date === currentDate);
 
-        entry = existingEntry ?? { date: currentDate, score : 0 }
+        entry = existingEntry ?? { date: currentDate, score: 0 }
         currentScore = entry.score;
         document.getElementById('score').innerText = entry.score;
         document.getElementById('main').style.display = 'block';
@@ -132,17 +132,15 @@ function updateHighscore(score) {
     const existingEntry = highscores.find(entry => entry.date === currentDate);
 
     if (existingEntry) {
-
         existingEntry.score = score;
     } else {
         // Add a new entry if there's no entry for the current date
         highscores.push({ date: currentDate, score });
     }
 
-    // Keep only the top 10 scores
-    if (highscores.length > 10) {
-        highscores = highscores.slice(0, 10);
-    }
+    // Sort highscores by date in descending order and keep only the top 10 scores
+    highscores.sort((a, b) => new Date(b.date) - new Date(a.date));
+    highscores = highscores.slice(0, 10);
 
     localStorage.setItem(highscoreKey, JSON.stringify(highscores));
 }
@@ -155,7 +153,8 @@ function displayHighscores() {
 
     highscores.forEach(entry => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${entry.date}: ${entry.score} Punkte`;
+        const formattedDate = new Date(entry.date).toLocaleDateString();
+        listItem.textContent = `${formattedDate}: ${entry.score} Punkte`;
         highscoreList.appendChild(listItem);
     });
 
