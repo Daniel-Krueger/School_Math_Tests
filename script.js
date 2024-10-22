@@ -17,7 +17,8 @@ function saveName() {
         localStorage.setItem(playerNameKey, nameInput);
         currentScore = 0;
         updateUI('score', currentScore);
-        toggleDisplay(['#unknown-user-section', '#welcome-message', '#taskBoard', '#main'], ['none', 'block', 'block', 'block']);
+        updateUI('stored-name', nameInput);
+        toggleDisplay(['#unknown-user-section', '#welcome-message', '#task-board', '#main'], ['none', 'block', 'block', 'block']);
         startGame();
     } else {
         alert("Bitte gib einen Namen ein.");
@@ -118,6 +119,7 @@ function updateHighscore(score) {
     }
     highscores.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10);
     localStorage.setItem(highscoreKey, JSON.stringify(highscores));
+    updateUI('score', currentScore);
 }
 
 function displayHighscores() {
